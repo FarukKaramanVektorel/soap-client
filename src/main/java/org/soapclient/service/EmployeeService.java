@@ -1,7 +1,6 @@
 package org.soapclient.service;
 
 
-
 import lombok.RequiredArgsConstructor;
 import org.soap.wsdl.GetEmployeeRequest;
 import org.soap.wsdl.GetEmployeeResponse;
@@ -9,13 +8,11 @@ import org.soapclient.dto.EmployeeDTO;
 import org.soapclient.model.EmployeeEntity;
 import org.soapclient.repository.EmployeeRepository;
 import org.soapclient.util.EmployeeMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ws.client.core.WebServiceTemplate;
-import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import org.springframework.ws.soap.client.core.SoapActionCallback;
 @Service
-@RequiredArgsConstructor
+
 public class EmployeeService {
     private static final String ENDPOINT_URL = "http://localhost:8010/ws";
     private static final String SOAP_ACTION = "http://localhost:8010/endpoint/getEmployeeRequest";
@@ -23,6 +20,11 @@ public class EmployeeService {
     private final WebServiceTemplate webServiceTemplate;
     private final EmployeeRepository employeeRepository;
     private final EmployeeMapper employeeMapper;
+    EmployeeService(WebServiceTemplate webServiceTemplate, EmployeeRepository employeeRepository,EmployeeMapper employeeMapper) {
+        this.webServiceTemplate = webServiceTemplate;
+        this.employeeRepository = employeeRepository;
+        this.employeeMapper = employeeMapper;
+    }
 
     public EmployeeDTO getEmployee(int id) {
         // SOAP isteği

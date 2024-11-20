@@ -1,10 +1,12 @@
 package org.soapclient.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmployeeDTO {
@@ -13,10 +15,15 @@ public class EmployeeDTO {
     private String lastname;
     private String jobtitle;
     private String email;
-    private String fullName; // firstname + lastname birleşimi
+    private String fullName;
 
-
+    // fullName getter'ı override edildi
     public String getFullName() {
-        return this.firstname + " " + this.lastname;
+        return firstname + " " + lastname;
+    }
+
+    // fullName setter'ı
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 }
